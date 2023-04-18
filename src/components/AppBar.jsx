@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { Link } from 'react-router-native';
 
@@ -22,18 +22,23 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     flexDirection: 'column',
   },
+  scrollView: {
+    marginHorizontal: 5,
+  },
   // ...
 });
 
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <Link to='/'>
-        <Text style={styles.item}>Repositories</Text>
-      </Link>
-      <Link to='/signIn'>
-        <Text style={styles.item}>Sign in</Text>
-      </Link>
+      <ScrollView horizontal style={styles.scrollView}>
+        <Link to='/'>
+          <Text style={styles.item}>Repositories</Text>
+        </Link>
+        <Link to='/signIn'>
+          <Text style={styles.item}>Sign in</Text>
+        </Link>
+      </ScrollView>
     </View>
   );
 };
