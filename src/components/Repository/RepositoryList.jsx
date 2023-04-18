@@ -62,8 +62,8 @@ const RepositoryList = () => {
       <FlatList
         data={repositories}
         ItemSeparatorComponent={ItemSeparator}
-        renderItem={({item}) =>  <RepositoryItem repo={item}></RepositoryItem>}
-        keyExtractor={item => item.id}
+        renderItem={({ item }) => <RepositoryItem repo={item}></RepositoryItem>}
+        keyExtractor={(item) => item.id}
         // other props
       />
     </SafeAreaView>
