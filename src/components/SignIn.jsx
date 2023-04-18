@@ -2,6 +2,7 @@ import { View, StyleSheet, Button } from 'react-native';
 import FormikTextInput from './ui/FormikTextInput';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   input: {
@@ -11,7 +12,9 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 4,
     marginBottom: 16.5,
-    borderColor: 'lightgray',
+    fontFamily: theme.fonts,
+    fontSize: theme.fontSizes.body,
+    borderColor: theme.colors.inputBox,
   },
   container: {
     justifyContent: 'center',

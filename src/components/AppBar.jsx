@@ -6,7 +6,7 @@ import theme from '../theme';
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: 'gray',
+    backgroundColor: theme.colors.backGround,
     flexWrap: 'wrap',
     alignItems: 'flex-start',
     flexDirection: 'row',
@@ -15,13 +15,13 @@ const styles = StyleSheet.create({
   item: {
     //Probably bad way to do this
     paddingTop: Constants.statusBarHeight / 2,
-    backgroundColor: 'gray',
-    fontSize: 24,
+    backgroundColor: theme.colors.backGround,
     padding: 16,
     fontWeight: 'bold',
-    color: 'white',
     textAlign: 'justify',
     flexDirection: 'column',
+    color: theme.colors.textBar,
+    fontSize: theme.fontSizes.bar,
     fontFamily: theme.fonts,
   },
   scrollView: {

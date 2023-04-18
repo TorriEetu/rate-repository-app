@@ -3,8 +3,8 @@ import theme from '../../theme';
 
 const styles = StyleSheet.create({
   parentContainer: {
-    backgroundColor: 'whitesmoke',
-    padding: 25,
+    backgroundColor: theme.colors.repoContainer,
+    padding: 20,
     paddingLeft: 25,
   },
   container: {
@@ -24,24 +24,24 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: 'bold',
-    fontSize: 16,
     marginBottom: 10,
+    fontSize: theme.fontSizes.subheading,
     fontFamily: theme.fonts,
   },
   description: {
-    color: 'grey',
-    fontSize: 14,
+    color: theme.colors.backGround,
     marginBottom: 10,
+    fontSize: theme.fontSizes.body,
     fontFamily: theme.fonts,
   },
   language: {
-    backgroundColor: 'blue',
+    backgroundColor: theme.colors.primary,
     borderRadius: 6,
     paddingVertical: 6,
     paddingHorizontal: 6,
     alignSelf: 'flex-start',
-    color: 'white',
-    fontSize: 14,
+    color: theme.colors.textBar,
+    fontSize: theme.fontSizes.body,
     fontFamily: theme.fonts,
   },
   infoContainer: {
@@ -50,14 +50,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   infoMainText: {
-    fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 2,
     textAlign: 'center',
+    fontSize: theme.fontSizes.body,
     fontFamily: theme.fonts,
   },
   infoText: {
-    color: 'grey',
+    color: theme.colors.backGround,
     fontFamily: theme.fonts,
   },
 });

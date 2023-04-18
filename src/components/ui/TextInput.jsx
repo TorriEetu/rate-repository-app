@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     marginBottom: 0,
     fontFamily: theme.fonts,
+    fontSize: theme.fontSizes.body,
   },
 });
 
