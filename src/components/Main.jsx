@@ -1,12 +1,18 @@
+import { Route, Routes, Navigate } from 'react-router-native';
 import { View } from 'react-native';
-import RepositoryList from './Repository/RepositoryList';
+import RepositoryList from './repository/RepositoryList';
 import AppBar from './AppBar';
+import SignIn from './SignIn';
 
 const Main = () => {
   return (
     <View>
       <AppBar></AppBar>
-      <RepositoryList></RepositoryList>
+      <Routes>
+        <Route path='/' element={<RepositoryList />} exact />
+        <Route path='/signIn' element={<SignIn />} exact />
+        <Route path='*' element={<Navigate to='/' replace />} />
+      </Routes>
     </View>
   );
 };

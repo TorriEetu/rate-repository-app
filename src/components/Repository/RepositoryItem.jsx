@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     borderRadius: 8,
+    marginTop: 8,
     width: 50,
     height: 50,
   },
