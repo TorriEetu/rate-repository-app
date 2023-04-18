@@ -1,4 +1,5 @@
 import { View, Text, Image, StyleSheet } from 'react-native';
+import theme from '../../theme';
 
 const styles = StyleSheet.create({
   parentContainer: {
@@ -25,11 +26,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     marginBottom: 10,
+    fontFamily: theme.fonts,
   },
   description: {
     color: 'grey',
     fontSize: 14,
     marginBottom: 10,
+    fontFamily: theme.fonts,
   },
   language: {
     backgroundColor: 'blue',
@@ -39,6 +42,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     color: 'white',
     fontSize: 14,
+    fontFamily: theme.fonts,
   },
   infoContainer: {
     paddingLeft: 20,
@@ -50,9 +54,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 2,
     textAlign: 'center',
+    fontFamily: theme.fonts,
   },
   infoText: {
     color: 'grey',
+    fontFamily: theme.fonts,
   },
 });
 

@@ -1,6 +1,7 @@
 import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { Link } from 'react-router-native';
+import theme from '../theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,6 +22,7 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'justify',
     flexDirection: 'column',
+    fontFamily: theme.fonts,
   },
   scrollView: {
     marginHorizontal: 5,
