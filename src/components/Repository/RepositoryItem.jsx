@@ -63,7 +63,6 @@ const styles = StyleSheet.create({
 });
 
 const RepositoryItem = ({ repo }) => {
-  console.log(repo);
   return (
     <View style={styles.parentContainer} testID='repositoryItem'>
       <View style={styles.container}>
