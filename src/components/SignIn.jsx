@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 });
 
 const initialValues = {
-  userName: '',
+  username: '',
   password: '',
 };
 
@@ -67,6 +67,14 @@ const validationSchema = yup.object().shape({
     .required('Password is required'),
 });
 
+export function SignInContainer({ onSubmit }) {
+  return (
+    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+    </Formik>
+  );
+}
+
 const SignIn = () => {
   const [signIn] = useSignIn();
   const navigate = useNavigate();
@@ -83,11 +91,7 @@ const SignIn = () => {
     }
   };
 
-  return (
-    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
-    </Formik>
-  );
+  return <SignInContainer onSubmit={onSubmit} />;
 };
 
 export default SignIn;
