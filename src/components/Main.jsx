@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import RepositoryList from './repository/RepositoryList';
 import AppBar from './AppBar';
 import SignIn from './SignIn';
-import RepositoryView from './repository/RepositoryView';
+import SingleRepository from './repository/SingleRepository';
 
 const Main = () => {
   return (
@@ -12,7 +12,7 @@ const Main = () => {
       <Routes>
         <Route path='/' element={<RepositoryList />} exact />
         <Route path='/signIn' element={<SignIn />} exact />
-        <Route path='/repo/:id' element={<RepositoryView />} />
+        <Route path='/repo/:id' element={<SingleRepository />} />
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
     </View>

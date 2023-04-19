@@ -1,4 +1,4 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, Button, Linking } from 'react-native';
 import theme from '../../theme';
 
 const styles = StyleSheet.create({
@@ -60,9 +60,17 @@ const styles = StyleSheet.create({
     color: theme.colors.backGround,
     fontFamily: theme.fonts,
   },
+  buttonContainer: {
+    marginTop: 15,
+    marginHorizontal: 12,
+  },
 });
 
-const RepositoryItem = ({ repo }) => {
+const RepositoryItem = ({ repo, git = false }) => {
+  function openGithub() {
+    Linking.openURL(repo.url);
+  }
+
   return (
     <View style={styles.parentContainer} testID='repositoryItem'>
       <View style={styles.container}>
@@ -91,6 +99,11 @@ const RepositoryItem = ({ repo }) => {
           <Text style={styles.infoText}>Rating</Text>
         </View>
       </View>
+      {git && (
+        <View style={styles.buttonContainer}>
+          <Button onPress={openGithub} title='Open in GitHub' />
+        </View>
+      )}
     </View>
   );
 };
