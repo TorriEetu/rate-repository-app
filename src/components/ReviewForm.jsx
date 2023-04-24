@@ -79,7 +79,7 @@ const ReviewInputForm = ({ onSubmit }) => {
           multiline></FormikTextInput>
       </View>
       <View style={styles.buttonContainer}>
-        <Button onPress={onSubmit} title='Sign in' />
+        <Button onPress={onSubmit} title='Create a review' />
       </View>
     </View>
   );

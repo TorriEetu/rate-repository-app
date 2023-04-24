@@ -52,9 +52,13 @@ const AppBar = () => {
         <Link to='/'>
           <Text style={styles.item}>Repositories</Text>
         </Link>
-        {me && (
+        {me ? (
           <Link to='/review'>
             <Text style={styles.item}>Create a review</Text>
+          </Link>
+        ) : (
+          <Link to='/signUp'>
+            <Text style={styles.item}>Sign up</Text>
           </Link>
         )}
         {me ? (
