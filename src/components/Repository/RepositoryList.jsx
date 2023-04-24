@@ -1,9 +1,11 @@
-import { FlatList, View, StyleSheet, Pressable, Text } from 'react-native';
+import { FlatList, View, StyleSheet, Pressable } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../../hooks/useRepositories';
 import { useNavigate } from 'react-router-native';
 import { Picker } from '@react-native-picker/picker';
 import { useState } from 'react';
+import TextInput from '../ui/TextInput';
+import { useDebounce } from 'use-debounce';
 
 const styles = StyleSheet.create({
   separator: {
@@ -13,6 +15,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
+//TODO Add css
 const OrderByPicker = ({ selectedOrder, setSelectedOrder }) => {
   return (
     <Picker selectedValue={selectedOrder} onValueChange={(value, index) => setSelectedOrder(value)}>
@@ -20,6 +23,15 @@ const OrderByPicker = ({ selectedOrder, setSelectedOrder }) => {
       <Picker.Item label='Highest rated repositories' value='HIGHEST' />
       <Picker.Item label='Lowest rated repositories' value='LOWEST' />
     </Picker>
+  );
+};
+
+//TODO Add css
+const FilterBySearch = ({ filter, setFilter }) => {
+  return (
+    <View>
+      <TextInput value={filter} onChangeText={(value) => setFilter(value)} />
+    </View>
   );
 };
 
@@ -34,11 +46,19 @@ const RepoItem = ({ repo }) => {
   );
 };
 
-export const RepositoryListContainer = ({ repositories, selectedOrder, setSelectedOrder }) => {
+export const RepositoryListContainer = ({
+  repositories,
+  selectedOrder,
+  setSelectedOrder,
+  filter,
+  setFilter,
+}) => {
   const repositoryNodes = repositories ? repositories.edges.map((edge) => edge.node) : [];
 
   return (
     <View>
+      <ItemSeparator></ItemSeparator>
+      <FilterBySearch filter={filter} setFilter={setFilter} />
       <OrderByPicker selectedOrder={selectedOrder} setSelectedOrder={setSelectedOrder} />
       <FlatList
         data={repositoryNodes}
@@ -52,12 +72,18 @@ export const RepositoryListContainer = ({ repositories, selectedOrder, setSelect
 
 const RepositoryList = () => {
   const [selectedOrder, setSelectedOrder] = useState('LATEST');
-  const { repositories } = useRepositories(selectedOrder);
+  const [filter, setFilter] = useState('');
+  const [debouncedFilter] = useDebounce(filter, 500);
+  console.log(debouncedFilter);
+  const { repositories } = useRepositories({ selectedOrder, filter: debouncedFilter });
+
   return (
     <RepositoryListContainer
       repositories={repositories}
       selectedOrder={selectedOrder}
       setSelectedOrder={setSelectedOrder}
+      filter={filter}
+      setFilter={setFilter}
     />
   );
 };
