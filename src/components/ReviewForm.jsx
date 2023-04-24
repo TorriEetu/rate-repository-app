@@ -3,8 +3,7 @@ import FormikTextInput from './ui/FormikTextInput';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import theme from '../theme';
-import useSignIn from '../hooks/useSignIn';
-import { useNavigate } from 'react-router-native';
+import useCreateReview from '../hooks/useCreateReview';
 
 const styles = StyleSheet.create({
   input: {
@@ -28,18 +27,18 @@ const styles = StyleSheet.create({
 });
 
 const initialValues = {
-  username: '',
-  reponame: '',
+  ownerName: '',
+  repositoryName: '',
   rating: 0,
-  review: '',
+  text: '',
 };
 
 const validationSchema = yup.object().shape({
-  username: yup
+  ownerName: yup
     .string()
-    .min(1, 'Username must be greater or equal to 1')
-    .required('Username is required'),
-  reponame: yup
+    .min(1, 'Repository owner name must be greater or equal to 1')
+    .required('Repository owner name is required'),
+  repositoryName: yup
     .string()
     .min(1, 'Repositorys name must be longer than 1')
     .required('Repositorys name is a required '),
@@ -48,30 +47,33 @@ const validationSchema = yup.object().shape({
     .min(0, 'Rating must be greater than 0')
     .max(100, 'Rating cannot be more than 100')
     .required('Rating is required'),
-  review: yup.string(),
+  text: yup.string(),
 });
 
-const SignInForm = ({ onSubmit }) => {
+const ReviewInputForm = ({ onSubmit }) => {
   return (
     <View style={styles.container}>
       <View>
         <FormikTextInput
-          name='username'
-          placeholder='Username'
+          name='ownerName'
+          placeholder='Repository owner name'
           style={styles.input}></FormikTextInput>
       </View>
       <View>
         <FormikTextInput
-          name='reponame'
-          placeholder='Reponame'
+          name='repositoryName'
+          placeholder='Repository name'
           style={styles.input}></FormikTextInput>
       </View>
       <View>
-        <FormikTextInput name='rating' placeholder='Rating' style={styles.input}></FormikTextInput>
+        <FormikTextInput
+          name='rating'
+          placeholder='Rating between 0 and 100'
+          style={styles.input}></FormikTextInput>
       </View>
       <View>
         <FormikTextInput
-          name='review'
+          name='text'
           placeholder='Review'
           style={styles.input}
           multiline></FormikTextInput>
@@ -83,20 +85,35 @@ const SignInForm = ({ onSubmit }) => {
   );
 };
 
-export function SignInContainer({ onSubmit }) {
+export function NewReviewContainer({ onSubmit }) {
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+      {({ handleSubmit }) => <ReviewInputForm onSubmit={handleSubmit} />}
     </Formik>
   );
 }
 
 const ReviewForm = () => {
+  const [createReview] = useCreateReview();
   const onSubmit = async (values) => {
+    const { ownerName, repositoryName, rating, text } = values;
+    try {
+      console.table({ ownerName, repositoryName, rating, text });
+      const data = await createReview({
+        ownerName,
+        repositoryName,
+        rating: Number(rating),
+        text,
+      });
+      console.log(data);
+    } catch (e) {
+      console.log(e);
+    }
+
     console.log(values);
   };
 
-  return <SignInContainer onSubmit={onSubmit} />;
+  return <NewReviewContainer onSubmit={onSubmit} />;
 };
 
 export default ReviewForm;
