@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
 const AppBar = () => {
   const authStorage = useAuthStorage();
   const apolloClient = useApolloClient();
-  const { data } = useQuery(ME);
+  const { data } = useQuery(ME, { variables: { includeReviews: false } });
+  console.log(data);
   const me = data?.me;
   console.log(me);
 
@@ -52,6 +53,11 @@ const AppBar = () => {
         <Link to='/'>
           <Text style={styles.item}>Repositories</Text>
         </Link>
+        {me && (
+          <Link to='/user/reviews'>
+            <Text style={styles.item}>My reviews</Text>
+          </Link>
+        )}
         {me ? (
           <Link to='/review'>
             <Text style={styles.item}>Create a review</Text>

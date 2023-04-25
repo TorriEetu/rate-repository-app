@@ -5,6 +5,7 @@ import useRepository from '../../hooks/useRepository';
 import RepositoryItem from './RepositoryItem';
 import useReviews from '../../hooks/useReviews';
 import { format } from 'date-fns';
+import { valueFromASTUntyped } from 'graphql';
 
 const styles = StyleSheet.create({
   separator: {
@@ -53,8 +54,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryInfo = ({ repository }) => {
-  // Repository's information implemented in the previous exercise
+export const RepositoryInfo = ({ repository }) => {
   return (
     <View>
       <RepositoryItem repo={repository} git={true} />
@@ -63,11 +63,10 @@ const RepositoryInfo = ({ repository }) => {
   );
 };
 
-const ReviewItem = ({ review }) => {
+export const ReviewItem = ({ review }) => {
   const date = format(new Date(review.createdAt), 'dd.MM.yyyy');
 
-  // Single review item
-  console.log(review);
+  console.log(review.repository);
   return (
     <View style={styles.parentContainer}>
       <View>
@@ -76,7 +75,12 @@ const ReviewItem = ({ review }) => {
         </View>
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.name}>{review.user.username}</Text>
+        {review?.repository?.fullName ? (
+          //TODO rewrite this
+          <Text style={styles.name}>{review.repository.fullName}</Text>
+        ) : (
+          <Text style={styles.name}>{review.user.username}</Text>
+        )}
         <Text style={styles.date}>{date}</Text>
         <Text>{review.text}</Text>
       </View>
